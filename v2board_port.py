@@ -1,3 +1,13 @@
+""" 免责声明
+
+**本脚本的使用需遵循以下条款：**
+
+1. 本脚本的用户应自行负责其使用行为，涉及的任何法律后果由用户自行承担。 
+2. 用户应确保所执行的操作符合相关法律法规的要求。
+3. 本脚本不对用户因使用或无法使用本脚本而产生的任何直接、间接、偶然、特殊及后续损害承担责任。
+4. 使用本脚本即表示用户已充分理解并同意遵守上述条款。
+
+"""
 import requests
 import json
 import random
@@ -5,7 +15,7 @@ import random
 BASE_URL = ""  #机场地址格式 http(s)://xxx.xxx.xxx
 EMAIL = ""  #管理员账户
 PASSWORD = ""  #管理员密码
-node_ids_to_modify = [*，*，*，*] #填写格式例如：node_ids_to_modify = [9, 10, 22, 25, 31, 32, 36, 37, 38, 39, 42]
+node_ids_to_modify = [*，*，*，*] #需要修改端口节点的id填写格式例如：node_ids_to_modify = [9, 10, 22, 25, 31, 32, 36, 37, 38, 39, 42]
 admin_url=""#后台路径
 session = requests.Session()
 def login():
@@ -30,10 +40,10 @@ def login():
     response = session.post(login_url, headers=headers, data=payload)
 
     if response.ok:
-        print("登录成功1", response.text)
+        #print("登录成功1", response.text)
         data = response.json().get("data", {})
         xddg8888_auth = data.get("auth_data")
-        print("登录成功2", xddg8888_auth)
+        #print("登录成功2", xddg8888_auth)
         get_nodes(xddg8888_auth)
     else:
         print("登录失败:")
@@ -59,7 +69,7 @@ def get_nodes(auth):
 
     if response.ok:
         nodes = response.json().get("data", [])
-        print("获取节点信息成功:", nodes)
+        #print("获取节点信息成功:", nodes)
         for node_id in node_ids_to_modify:
             #new_port = random.randint(1000, 65535)  # 生成新的随机端口
             new_server_port = random.randint(1000, 65535)  # 生成新的随机服务器端口
